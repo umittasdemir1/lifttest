@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel Yükle ve Analiz Et</title>
+</head>
+<body>
+    <h2>Excel Dosyası Yükle</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".xlsx,.xls" required>
+        <button type="submit">Yükle</button>
+    </form>
+
+    {% if result %}
+        <h3>Analiz Sonucu:</h3>
+        {% if result is string %}
+            <p>{{ result }}</p>
+        {% else %}
+            <table border="1">
+                <tr>
+                    <th>Ürün Grubu</th>
+                    <th>Adet</th>
+                </tr>
+                {% for row in result.values %}
+                    <tr>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
